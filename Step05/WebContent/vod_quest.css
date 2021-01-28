@@ -1,0 +1,122 @@
+@charset "UTF-8";
+   
+        *{
+            margin:0;
+            padding:0;
+            background-color: #28262e;
+            color: #e8e8e8;
+        }
+       
+        header{
+            clear: both;
+        }
+        .advertising{
+            width: 90%;
+            margin: 0 auto;
+            border-top: 1px solid #e8e8e8;
+        	padding:30px;
+        }
+        .view{
+            position: relative;            
+        }
+        .advertising .view h2{
+            position: absolute;
+            left: 50px;
+            bottom: 100px;
+            font-size: 24px;
+            color:#ffffff;
+            background:none !important;
+        }
+        .advertising .view p{
+            position: absolute;
+            left: 50px;
+            bottom: 70px;
+            color:#ffffff;
+            background:none !important;
+        }
+        .vod_bar .view h2{
+            position: absolute;
+            left: 50px;
+            bottom: 50px;
+            font-size: 20px;
+            color:#ffffff;
+            background:none !important;
+        }
+        h1{
+            padding-left: 50px;
+            padding-bottom: 20px;
+        }
+        .bx-wrapper{
+            box-shadow: none;
+            background: none;
+            border: none;
+        }
+        
+        footer h3{
+            padding:20px;
+            border-top: 1px solid #e8e8e8;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        footer p{
+            padding:20px;
+            
+        }
+        /*로그인 창*/
+        #pop{
+            width:200px;
+            border: 1px solid #246CFF;
+            display: none;
+            position: absolute;
+            top:50px;
+            right: 100px;
+        }
+        #title{
+            background-color: #6799FF ;
+            font-size: 20px;
+            font-weight: bold;
+            text-align: center;
+            padding:5px;
+        }
+        input{
+            width: 200px; 
+            height: 50px;
+            font-size: 18px;
+            box-sizing: border-box;
+        }
+        button{
+            width:100px;
+            height: 50px;            
+            font-size: 18px;
+            background-color: #28262e;
+            border: none;
+            box-sizing: border-box; 
+        }
+        button:hover{
+            background-color: #B8B8B8;
+        }
+		#logo{
+			width: 150px;
+	        height: 40px;
+	        margin:25px 80px; 
+   			font-size: 20px;
+	        box-sizing: border-box;
+	        float: left;
+	        text-shadow: 0px 10px  #9ac551, 0px 10px #556b2f, 0px 10px #899e65;
+		}
+		ul{
+        list-style-type: none;
+        display: inline-block;
+    	}
+    	li{
+        margin: 25px 30px;
+        position:relative;
+		right:50px;
+        float: right;
+		}
+		li > a:link,li > a:visited {	
+		text-decoration: none;	
+		text-align: center;
+		padding: 20px 30px;
+        float: right;
+        
+	}

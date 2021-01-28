@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="qna">
+	
+	<insert id="insertQna" parameterType="dto.QnaDTO">
+		insert into qna(qno, title, content, writer) values(qno_seq.nextval, #{title}, #{content}, #{writer} )
+	</insert>
+	
+	<select id="selectQnaList" resultType="dto.QnaDTO"  parameterType="map">
+		select qno, title, content, wdate, writer, status, response 
+		from (select ceil(rownum / 5) as page, qno, title, content, 
+		wdate, writer, status, nvl(response,'입력된 답변이 없습니다') 
+		from (select * from qna where writer = #{writer} order by qno desc))
+		where page = #{pageNo}
+	</select>
+	
+	<select id="selectQnaAdminList" resultType="dto.QnaDTO"  parameterType="int">
+		select qno, title, content, wdate, writer, status, response from 
+		(select ceil(rownum / 5) as page, qno, title, 
+		content, wdate, writer, status, response from 
+		(select * from qna order by status asc, qno desc)) where page = #{pageNo}
+	</select>
+
+	<select id="selectNoAnswerList" parameterType="map" resultType="dto.QnaDTO">
+		select * from qna where status in(0,1)
+	</select>
+
+	<select id="selectCountQna" parameterType="int">
+		select count(*) from qna
+	</select>
+
+	<select id="selectQna" parameterType="int">
+		select qno, title, content, wdate, writer, status,
+				nvl(response,'답변 없음') from qna where qno = #{qno}
+	</select>
+
+	<update id="updateResponse" parameterType="int">
+		update qna set response = #{response} || ?, status=2 where qno = #{qno}
+	</update>
+
+	<update id="updateQnAStatus" parameterType="int"  resultType="dto.QnaDTO">
+		update qna set status = 1 where qno = #{qno} and status not in(1,2)
+	</update>
+	
+</mapper>

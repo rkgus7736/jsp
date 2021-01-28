@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="db.sqlmapper">
+
+	<select id="selectAllCountEmployee" resultType="int">
+		select count(*) from employee
+	</select>
+	
+	<select id="selectAllEmployee" resultType="dto.EmployeeDTO">
+		select count * from employee
+	</select>
+	
+	<select id="selectPositionEmployee" resultType="dto.EmployeeDTO" parameterType="int">
+		<!-- position이 4보다 작은 애들 추출
+			<![CDATA[select * from employee where position < 4]]>  -->
+		<![CDATA[select * from employee where position < #{no}]]>
+	</select>
+		
+	<select id="selectPositionAreaEmployee" resultType="dto.EmployeeDTO" parameterType="map">
+		<!-- #{no}에 우리가 받아온 숫자를 넣어주겠다. -->
+		<![CDATA[select * from employee where position between #{n1} and #{n2}]]>
+	</select>
+	
+	<insert id="insertEmployee" parameterType="dto.EmployeeDTO">
+		insert into employee(eno,name,department,position) 
+			values (#{eno},#{name},#{department},#{position})
+	</insert>
+	
+	<update id="updateEmployee" parameterType="dto.EmployeeDTO">
+		<!-- #{no}에 우리가 받아온 숫자를 넣어주겠다. -->
+		update employee set name = #{name}, department = #{department}, position = #{position},
+		where eno = #{eno}
+	</update>
+	
+	<select id="selectNameEmployee" resultType="dto.EmployeeDTO" parameterType="String">
+		select * from employee where name like '%'||#{name}||'%'
+	</select>
+	
+	<delete id="deleteEmployee" parameterType="int" >
+		<!-- 값이 하나들어오면 #{position}의 변수명이 바뀌어도 됨 -->
+		delete from employee where position = #{position}
+	</delete>
+	
+	<select id="selectSearchEmployee" parameterType="map" resultType="dto.EmployeeDTO">
+	<!-- 1. if로 사용하는 방법
+		<if test ="kind.equals('name')">
+		select * from (select e.eno, e.ename, e.department, e.position, es.salary)from employee e, 
+		employee_salary es where e.eno = es.eno(+)) where name like '%'||#{name}||'%'
+		</if>
+		<if test ="kind.equals('eno')">
+		select * from (select e.eno, e.ename, e.department, e.position, es.salary)from employee e, 
+		employee_salary es where e.eno = es.eno(+)) where eno like '%'||#{eno}||'%'
+		</if>
+		<if test ="kind.equals('department')">
+		select * from (select e.eno, e.ename, e.department, e.position, es.salary)from employee e, 
+		employee_salary es where e.eno = es.eno(+)) where department like '%'||#{department}||'%'
+		</if>
+	-->
+		<choose>
+			<when test ="kind.equals('name')">
+				select * from (select e.eno, e.ename, e.department, e.position, es.salary)from employee e, 
+				employee_salary es where e.eno = es.eno(+)) where name like '%'||#{name}||'%'
+			</when>
+			<when test ="kind.equals('eno')">
+				select * from (select e.eno, e.ename, e.department, e.position, es.salary)from employee e, 
+				employee_salary es where e.eno = es.eno(+)) where eno like '%'||#{eno}||'%'
+			</when>
+			<otherwise>
+		 		 select * from (select e.eno, e.name, e.department, e.position, es.salary
+		 		 from employee e , employee_salary es where e.eno = es.eno(+))
+		 		 where department like '%'||#{search}||'%'
+	 		</otherwise>
+		</choose>
+	</select>
+</mapper>

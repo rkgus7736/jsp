@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="member">
+	<!-- resultType : 결과를 받아올 타입 -->
+	<select id="selectMemberVO" parameterType="string" resultType="vo.MemberVO">
+ 		select * from member where id like #{id}
+ 	</select>
+ 	<insert id="insertMemberVO" parameterType="vo.MemberVO">
+ 		insert into member(id,pass,name,age) values(#{id},#{pass},#{name},#{age}) 	 	
+ 	</insert>
+ 	<update id="updatePass" parameterType="map">
+ 		update  member set pass = #{pass} where id = #{id}
+ 	</update>
+ 	<select id="login" parameterType="map" resultType="vo.MemberVO">
+ 		select id, name, pass, age, grade_name from member, grade_list where grade_no = grade and id like #{id} and pass like #{pass}
+ 	</select>
+ 	<update id="updateMember" parameterType="vo.MemberVO">
+ 		update member set pass=#{pass},name=#{name},age=#{age} where id=#{id}
+ 	</update>
+ 	<select id="selectAllMember" resultType="vo.MemberVO">
+ 		select id, name, pass, age, grade_name from member, grade_list where grade_no = grade order by grade desc
+ 	</select>
+	
+	<select id="searchMember" resultType="vo.MemberVO" parameterType="map">
+		<choose>
+			<when test="kind.equals('name')">
+			 select id, name, pass, age, grade_name from member, grade_list
+			 where grade_no = grade and name like '%'||#{search}||'%' order by grade desc
+			</when>
+			<when test="kind.equals('id')">
+			 select id, name, pass, age, grade_name from member, grade_list
+			 where grade_no = grade and name like '%'||#{search}||'%' order by grade desc
+			</when>
+			<otherwise>
+			 select id, name, pass, age, grade_name from member, grade_list
+			 where grade_no = grade and name like '%'||#{search}||'%' order by grade desc
+			</otherwise>
+		</choose>
+	</select>
+		
+	<update id="updateManageMember" parameterType="vo.MemberVO">
+		update member set name = #{name}, age = #{age}, 
+		grade = (select grade_no from grade_list where grade_name = #{grade}) where id= #{id}
+	</update>
+
+	<delete id="deleteMember" parameterType="String" >
+		delete from member where id = #{id}
+	</delete>
+</mapper>
