@@ -1,0 +1,35 @@
+사용자 이메일 설정
+git config --global user.email "메일주소"
+
+사용자 이름 설정
+git config --global user.name "닉네임"
+
+버전관리할 폴더 설정
+git init .
+.  --> 현재 폴더
+
+현재 깃의 상태, 작업이 이루어진 파일...
+git status 
+
+버전관리할 파일을 추가
+git add 파일명
+
+버전 만들기 - 1
+git commit -m "커밋 메세지"
+
+버전 만들기 - 2 
+기존에 추가된 파일도 변경이 되면 자동 추가
+git commit -am "커밋 메세지"   
+
+버전 만들기 - 3
+텍스트 편집기로 커밋 메세지 작성 후 커밋
+git commit --edit
+
+로그
+git log
+
+이전버전으로 돌아감
+git checkout commit아이디
+
+다시 최신버전으로 돌아옴
+git checkout master

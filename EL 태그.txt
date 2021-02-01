@@ -1,0 +1,30 @@
+jsp 표준태그 라이브러리 
+EL 태그 값을 표현하는데 사용되는 스크립트형 언어
+
+request --> requestScope
+session --> sessionScope
+application --> applicationScope
+page  --> pageScope
+----------------------------------------------------------------------------------
+
+--setAttribute로 저장한 내용을 꺼내는 방법
+
+session.setAttribute("id",vo.getId());
+sessionScope.id(키 값) 세션 영역에 저장된 id(키 값)을 불러오는것 -> ${sessionScope.꺼내올 데이터} 로 쓰면됨
+ex) <img src="img/${sessionScope.grade}.png" style="width:32px;"> 
+
+
+--배열에도 사용 가능
+
+-list에 저장해놨을때
+${requestScope.list[0]} 
+${requestScope.list[1]} 
+${requestScope.list[2]} 
+
+
+--EL 태그 적용을 무시 (기본값= false)
+<%@page isELIgnored="true" %> 
+
+--비교 및 문자열 합치기
+${sessionScope.grade == "master" }
+${sessionScope.grade += ".png" }

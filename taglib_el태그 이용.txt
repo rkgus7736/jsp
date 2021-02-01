@@ -1,0 +1,42 @@
+1. jstl
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+#분기문
+조건식 el태그를 이용해서
+<c:if test="조건식">
+	반복한 내용 태그 + el 태그
+</c:if>
+
+ex)  <c:if test="${sessionScope.grade == 'master' }">
+            관리자 입니다
+     </c:if>
+--------------------------------------------------------
+<c:choose> 
+	<c:when test=""> : if 와 같음
+	</c:when>
+	<c:when test="">
+	</c:when>
+	<c:when test="">
+	</c:when>
+
+	<c:otherwise>   : else와 같은 뜻
+	</c:otherwise>
+</c:choose>
+
+ex)  
+-------------------------------------------------------------
+#반복문
+
+//begin : 시작값 end : 마지막값 items : 가져올값
+<c:forEach var = "반복문 내부에서 사용할 변수" begin=" 시작값" end="종료값" step="증감값" >
+</c:forEach>
+
+
+// items : 가져올값
+<c:forEach var = "반복문 내부에서 사용할 변수" items="배열,Collection(List,Set 계열)" varStatus="반복문 상태, 속성값.count->현재 반복 상태">
+</c:forEach>
+
+ex) <c:forEach var = "dto" items="${requestScope.list }">
+	${dto.title } | ${dto.writer } | ${dto.date } | ${dto.status }<br>
+	${dto.content }<br>
+    </c:forEach>

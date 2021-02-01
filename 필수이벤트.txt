@@ -1,0 +1,26 @@
+onload = 리소스 로딩이 끝났을때
+onfocus = 해당 폼태그가 선택 됐을때
+onblur = 해당 폼태그가 선택이 해제 됐을때 
+onsubmit = 폼태그 내부에 submit 버튼을 눌렀을때
+	   서버 페이지에 제출할때
+onscroll = 스크롤바가 움직였을때
+
+onkeyup = 키보드 키를 눌렀다 뗀순간
+onkeydown = 키보드 키를 눌렀을때
+onkeypress = 키보드 키를 누르고 있을때
+
+onclick = 마우스왼쪽버튼 클릭했을때
+
+onmouseover = 마우스 포인터가 해당태그에 올라갔을때
+onmouseout = 마우스 포인터가 해당태그에 벗어났을때
+
+onmouseenter = 마우스 포인터가 해당 태그 영역에 올라가 있을때
+onmouseleave = 마우스 포인터가 해당 태그 영역에 올라가 벗어났때
+
+
+
+
+
+
+
+
